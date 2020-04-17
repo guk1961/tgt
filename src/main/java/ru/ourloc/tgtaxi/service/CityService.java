@@ -20,7 +20,7 @@ public class CityService {
 	   }
 
 	   public City findByCityname(String name){
-		   return cityRepo.findByCityname(name);		   
+		   return cityRepo.findByName(name);		   
 	   }
 
 }

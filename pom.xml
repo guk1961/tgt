@@ -16,6 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 
@@ -134,11 +135,18 @@
             <scope>test</scope>
         </dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.telegram/telegrambots -->
 		<dependency>
-	        <groupId>org.telegram</groupId>
-	        <artifactId>telegrambots</artifactId>
-	        <version>4.6</version>
-	    </dependency>
+		    <groupId>org.telegram</groupId>
+		    <artifactId>telegrambots</artifactId>
+		    <version>4.7</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.10.3</version>
+		</dependency>
 
     </dependencies>
 

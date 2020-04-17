@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,15 +18,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import ru.ourloc.tgtaxi.domain.City;
 import ru.ourloc.tgtaxi.domain.Message;
 import ru.ourloc.tgtaxi.domain.User;
 import ru.ourloc.tgtaxi.domain.dto.MessageDto;
+import ru.ourloc.tgtaxi.repos.CityRepo;
 import ru.ourloc.tgtaxi.repos.MessageRepo;
+import ru.ourloc.tgtaxi.service.CityService;
 import ru.ourloc.tgtaxi.service.MessageService;
 
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -41,11 +49,25 @@ public class MessageController {
     @Value("${upload.path}")
     private String uploadPath;
 
+	@Autowired
+	CityService cityService;
+	
+	@Autowired
+	CityRepo cityRepo;
+
+	
     @GetMapping("/")
-    public String greeting(Map<String, Object> model) {
-        return "greeting";
+    public String greeting(Model model) throws JsonProcessingException {
+    	List<City> citys = cityService.findAll();
+    	model.addAttribute("citys", citys);
+    	 ObjectMapper mapper = new ObjectMapper();
+         String jsonCitys = mapper.writeValueAsString(citys);
+      	 model.addAttribute("jsoncitys", jsonCitys);
+
+         return "greeting";
     }
 
+   
     @GetMapping("/main")
     public String main(
             @RequestParam(required = false, defaultValue = "") String filter,
