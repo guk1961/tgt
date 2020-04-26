@@ -11,7 +11,8 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js"></script>
+<!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js"></script> -->
+
     <link rel="stylesheet" href="css/style.css">
     <style>
         .turbolinks-progress-bar {
@@ -27,11 +28,13 @@
     <h3>Карта свободного такси</h3>
     <div id="map"></div>
     
+    <script src="/js/axios.min.js"></script>
 	<script src="js/gmap.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer_compiled.js">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer_compiled.js">
     </script>   
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfVLGvS065qHj20IKuYVMtJ6wb1Q7C9WQ&language=ru&callback=initMap">
     </script>
+    
   </body>
 </html>

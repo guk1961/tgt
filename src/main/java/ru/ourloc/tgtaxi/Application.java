@@ -11,12 +11,12 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 
 import ru.ourloc.tgt.TgTaxiBot;
 
-//@SpringBootApplication
+@SpringBootApplication
 //@EnableScheduling
 public class Application {
     public static void main(String[] args) {
-//        SpringApplication.run(Application.class, args);
-        
+        SpringApplication.run(Application.class, args);
+/*        
 		System.getProperties().put("proxiSet", "true");
 		System.getProperties().put("socksProxyHost", "127.0.0.1");
 		System.getProperties().put("socksProxyPort", "9150");
@@ -24,18 +24,13 @@ public class Application {
 		ApiContextInitializer.init();
 		TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
 
-//		DefaultBotOptions botOptions = ApiContext.getInstance(DefaultBotOptions.class);
-//		botOptions.setProxyHost("127.0.0.1");
-//		botOptions.setProxyPort(9150);
-//		// Select proxy type: [HTTP|SOCKS4|SOCKS5] (default: NO_PROXY)
-//		botOptions.setProxyType(DefaultBotOptions.ProxyType.SOCKS5);
 		try {
 			telegramBotsApi.registerBot(new TgTaxiBot());
 		} catch (Exception e) {
 				e.printStackTrace();
 		}
 		System.out.println("tgtaxibot starting...");
-
+*/
 		
 		
 		/////////////////////////PROXI/////////////////////////

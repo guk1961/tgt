@@ -52,5 +52,17 @@ public class MapController {
     	return jsonString;
     }
 
+	    @GetMapping("/test")
+	    public String greeting(Model model) throws JsonProcessingException {
+	    	List<City> citys = cityService.findAll();
+	    	model.addAttribute("citys", citys);
+	    	 ObjectMapper mapper = new ObjectMapper();
+	         String jsonCitys = mapper.writeValueAsString(citys);
+	      	 model.addAttribute("jsoncitys", jsonCitys);
 
+	         return "test";
+	    }
+
+
+		
 }
