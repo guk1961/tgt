@@ -3,7 +3,9 @@
   <head>
    <title>TgT</title>
     <meta name="viewport" content="initial-scale=1.0">
-     <meta contentType="text/html; charset=UTF-8"/>
+    <meta contentType="text/html; charset=UTF-8"/>
+	<!-- <link rel="stylesheet" href="css/style.css"> -->
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -13,12 +15,21 @@
     <script src='https://www.google.com/recaptcha/api.js'></script>
 <!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js"></script> -->
 
-    <link rel="stylesheet" href="css/style.css">
     <style>
         .turbolinks-progress-bar {
             height: 2px;
             background-color: navy;
         }
+        #map {
+        height: 600px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+      }
+      /* Optional: Makes the sample page fill the window. */
+ html, body {
+   height: 100%;
+        margin: 0;
+        padding: 0;
+      }
     </style>
 
   </head>
