@@ -67,6 +67,17 @@ public class MessageController {
          return "greeting";
     }
 
+//    @PostMapping("/search")
+//    public String search(@RequestParam String cityname, Model model) throws JsonProcessingException {
+//    	List<City> citys = cityService.findByCityFilter(cityname);
+//    	model.addAttribute("citys", citys);
+//    	 ObjectMapper mapper = new ObjectMapper();
+//         String jsonCitys = mapper.writeValueAsString(citys);
+//      	 model.addAttribute("jsoncitys", jsonCitys);
+//      	 System.out.println(jsonCitys);     	 
+//
+//         return "greeting";
+//    }
    
     @GetMapping("/main")
     public String main(

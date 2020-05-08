@@ -19,7 +19,12 @@ public class CityService {
 		   
 	   }
 
+	   public List<City> findByCityFilter(String name){
+		   return cityRepo.findByCity("%"+name.toUpperCase()+"%");		   
+	   }
+
 	   public City findByCityname(String name){
+		   
 		   return cityRepo.findByName(name);		   
 	   }
 

@@ -1,29 +1,66 @@
  var markers = [];
  var citys = [];
+ var map;
+
+
+ function initialize() {
+	 //markersArray.push(newMarker) ;
+	 var mapProp = {			 
+			 center: new google.maps.LatLng("55.753215", "37.622504"),
+			 zoom: 6,
+			 mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+	
+   map = new google.maps.Map(document.getElementById('map'), mapProp);
+ };
  
 function initMap() {
 
-  var myLatlng = {lat: 55.753215, lng: 37.622504};
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 5,
-    center: myLatlng
-  });
+	initialize();
+	getData()
+}
+
+function attachMessage(marker, message) {
+    var infowindow = new google.maps.InfoWindow({
+      content: message
+    });
+
+    marker.addListener('click', function() {
+      infowindow.open(marker.get('map'), marker);
+      
+      map.setCenter(marker.position)
+      map.setZoom(map.getZoom()+1)
+      console.log('pos=', marker.title)
+      
+    });
+  }
 
 
-  axios.get('/geo.js')
-  .then(function (response) {
-	  citys = response.data;
-//    console.log('Массив координат городов = ', citys);
-    console.log('ArrayLength = ',citys.length)
-    /////////////////////////////////
+ function getData(){
+	  axios.get('/geo.js')
+	  .then(function (response) {
+	    citys = response.data;
+	    console.log('ArrayLength = ',citys.length);
+	    setMap(response.data);
+	  })
+	  .catch(function (error) {
+	    console.log(error);
+	  });
+}
+
+function setMap(arrCitys){
     var zoom = 8;
-    var markers = [];
-    for (var i = 0; i < citys.length; i++) {
-      var dataCity = citys[i];
+//    var markers = [];
+    
+    for (var i = 0; i < arrCitys.length; i++) {
+      var dataCity = arrCitys[i];
       var latLng = new google.maps.LatLng(
         dataCity.lat,
         dataCity.lng
       );
+      let dateGeoposition;
+      var x = new Date();
+      dateGeoposition = x.toString();
       
       var message = '<div id="content">'+
       '<div id="siteNotice">'+
@@ -34,12 +71,12 @@ function initMap() {
       'Вы можете заказать такси, напрямую, без агрегатора и обговорить детали поездки '+
       '<p>Ознакомиться со стандартами нашей группы, тарифами, автомобилями и непосредственно с водителями здесь: <a href="http://telegataxi.ru">'+
       'Стандарты нашего города</a> '+
-      '(Геопозиция от 28.04.2020 20.45 мск).</p>'+
+      '(Геопозиция от ' +dateGeoposition+').</p>'+
       '</div>'+
       '</div>';
       
 //      console.log(citys[i].name);
-      var marker = new google.maps.Marker({
+      let marker = new google.maps.Marker({
         position: latLng,
         draggable: false,
         title: dataCity.name,
@@ -63,44 +100,60 @@ function initMap() {
 		{height: 90,url: "static/img/m5.png",width: 90}]}
 
     markerCluster = new MarkerClusterer(map, markers,markerClusterOptions);
-
-    
-    /////////////////////////////////////////////////
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-  
-//getData()
-
-
-  
-  function attachMessage(marker, message) {
-      var infowindow = new google.maps.InfoWindow({
-        content: message
-      });
-
-      marker.addListener('click', function() {
-        infowindow.open(marker.get('map'), marker);
-        
-        map.setCenter(marker.position)
-        map.setZoom(map.getZoom()+1)
-        console.log('pos=', marker.title)
-        
-      });
-    }
-  
-
-  async function getData(){
-	    let response = await fetch('/geo.js')
-	    let data = await response.json()
-	    citys = data
-	    console.log('Data222 = ',citys)
-	    return data
-	    
-	}
+//    markerCluster.setIgnoreHidden(true);
 
 }
 
+function removeMarkers(){
 
+	markerCluster.clearMarkers();
+
+	for(i=0; i<markers.length; i++){
+        
+        markers[i].visible=false;
+        markers[i].setMap(null);
+//        console.log(markers[i])
+    }
+    markers = []
+    markers.length = 0
+//    console.log('markers = ', markers)
+
+    //	markerCluster.repaint();
+
+}
+
+var removeByAttr = function(arr, attr, value){
+    var i = markers.length;
+    while(i--){
+       if( markers[i])
+
+    	   markers.splice(i,1);
+       
+    }
+    return arr;
+}
+
+
+$(document).ready(function(){
+	$('#searchForm').submit(function(event){
+		event.preventDefault();
+
+//		initialize();
+			removeMarkers()
+			$.ajax({
+			type: $(this).attr('method'),
+			url: $(this).attr('action'),
+			data: new FormData(this),
+			contentType: false,
+			cache: false,
+			processData: false,
+			success: function(result){
+				 setMap(result);
+				 if(result.length>0)
+					 map.setCenter(markers[0].position)
+				 
+			}
+		})
+	})
+})
 

@@ -31,26 +31,26 @@ public class MapController {
 	CityRepo cityRepo;
 	
 	
-//		@GetMapping("/geo")
-		@RequestMapping(produces = "application/javascript", 
-	    method = RequestMethod.GET,
-	    value = "/geo.js")
-		@ResponseBody
-        public String map(Model model) throws JsonProcessingException {
-    	
-    	List<City> citys =  cityService.findAll();
-    	 model.addAttribute("citys", citys);
-    	 
-//    	 for(City c : citys) {
-//    		 System.out.println(c.getName());
-//    	 }
-    	 ObjectMapper mapper = new ObjectMapper();
-         //Converting the Object to JSONString
-         String jsonString = mapper.writeValueAsString(citys);
-        // System.out.println(jsonString);
-        
-    	return jsonString;
-    }
+////		@GetMapping("/geo")
+//		@RequestMapping(produces = "application/javascript", 
+//	    method = RequestMethod.GET,
+//	    value = "/geo.js")
+//		@ResponseBody
+//        public String map(Model model) throws JsonProcessingException {
+//    	
+//    	List<City> citys =  cityService.findAll();
+//    	 model.addAttribute("citys", citys);
+//    	 
+////    	 for(City c : citys) {
+////    		 System.out.println(c.getName());
+////    	 }
+//    	 ObjectMapper mapper = new ObjectMapper();
+//         //Converting the Object to JSONString
+//         String jsonString = mapper.writeValueAsString(citys);
+//        // System.out.println(jsonString);
+//        
+//    	return jsonString;
+//    }
 
 	    @GetMapping("/test")
 	    public String greeting(Model model) throws JsonProcessingException {
