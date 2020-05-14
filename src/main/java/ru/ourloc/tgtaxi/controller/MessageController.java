@@ -127,6 +127,8 @@ public class MessageController {
         model.addAttribute("page", page);
         model.addAttribute("user", user);
 
+        System.out.println(file.getName());
+
         return "main";
     }
 
@@ -180,6 +182,11 @@ public class MessageController {
             @RequestParam("tag") String tag,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
+    	if(message == null){
+    		message = new Message();
+    		message.setAuthor(currentUser);	
+    	}
+    	
         if (message.getAuthor().equals(currentUser)) {
             if (!StringUtils.isEmpty(text)) {
                 message.setText(text);
@@ -193,6 +200,8 @@ public class MessageController {
 
             messageRepo.save(message);
         }
+        
+        System.out.println(file.getName());
 
         return "redirect:/user-messages/" + user;
     }
@@ -217,7 +226,12 @@ public class MessageController {
         components.getQueryParams()
                 .entrySet()
                 .forEach(pair -> redirectAttributes.addAttribute(pair.getKey(), pair.getValue()));
-
+        System.out.println("message_id="+message.getId()+" redirect:" + components.getPath());
+        
+        messageRepo.save(message);
+        for(User user:likes) {
+            System.out.println("lik:" + user.getUsername());
+        }
         return "redirect:" + components.getPath();
     }
 }

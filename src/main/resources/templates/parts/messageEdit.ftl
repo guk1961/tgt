@@ -1,6 +1,6 @@
 
-<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Message editor
+<a class="btn btn-outline-secondary btn-sm" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Редактор сообщений
 </a>
 <div class="collapse <#if message??>Просмотр</#if>" id="collapseExample">
     <div class="form-group mt-3">
@@ -32,7 +32,7 @@
             <input type="hidden" name="_csrf" value="${_csrf.token}" />
             <input type="hidden" name="id" value="<#if message??>${message.id}</#if>" />
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Сохранить сообщение</button>
+                <button type="submit" class="btn btn-outline-secondary btn-sm">Сохранить сообщение</button>
             </div>
         </form>
     </div>

@@ -5,9 +5,9 @@
 ${message?ifExists}
 <form method="post">
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Password:</label>
+        <label class="col-sm-2 col-form-label">Пароль:</label>
         <div class="col-sm-6">
-            <input type="password" name="password" class="form-control" placeholder="Password" />
+            <input type="password" name="password" class="form-control" placeholder="введите пароль" />
         </div>
     </div>
     <div class="form-group row">
@@ -17,6 +17,6 @@ ${message?ifExists}
         </div>
     </div>
     <input type="hidden" name="_csrf" value="${_csrf.token}" />
-    <button class="btn btn-primary" type="submit">Save</button>
+    <button class="btn btn-outline-secondary" type="submit">Сохранить</button>
 </form>
 </@c.page>

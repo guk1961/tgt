@@ -16,13 +16,13 @@
     </#if>
     <div class="container mt-3">
         <div class="row">
-            <ul class="pagination col justify-content-center">
+            <ul class="pagination pagination-sm justify-content-end">
                 <li class="page-item disabled">
                     <a class="page-link" href="#" tabindex="-1">Страницы</a>
                 </li>
             <#list body as p>
                 <#if (p - 1) == page.getNumber()>
-                    <li class="page-item active">
+                    <li class="page-item active ">
                         <a class="page-link" href="#" tabindex="-1">${p}</a>
                     </li>
                 <#elseif p == -1>
@@ -31,13 +31,13 @@
                     </li>
                 <#else>
                     <li class="page-item">
-                        <a class="page-link" href="${url}?page=${p - 1}&size=${page.getSize()}" tabindex="-1">${p}</a>
+                        <a class="page-link " href="${url}?page=${p - 1}&size=${page.getSize()}" tabindex="-1">${p}</a>
                     </li>
                 </#if>
             </#list>
             </ul>
 
-            <ul class="pagination col justify-content-center">
+            <ul class="pagination pagination-sm justify-content-end">
                 <li class="page-item disabled">
                     <a class="page-link" href="#" tabindex="-1">Элементов на странице</a>
                 </li>
