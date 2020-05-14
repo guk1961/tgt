@@ -27,8 +27,12 @@ public class User implements UserDetails {
     @NotBlank(message = "Email не может быть пустым")
     private String email;
     private String activationCode;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "group_id")
+//    private Group group;
+    
 
-    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+	@ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
@@ -70,6 +74,7 @@ public class User implements UserDetails {
         return roles.contains(Role.ADMIN);
     }
 
+    
     public Long getId() {
         return id;
     }

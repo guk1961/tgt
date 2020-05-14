@@ -21,8 +21,10 @@ public class UserController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
-    public String userList(Model model) {
+    public String userList(Model model,
+    		@AuthenticationPrincipal User user) {
         model.addAttribute("users", userSevice.findAll());
+        model.addAttribute("user", user);
 
         return "userList";
     }
@@ -52,6 +54,8 @@ public class UserController {
     public String getProfile(Model model, @AuthenticationPrincipal User user) {
         model.addAttribute("username", user.getUsername());
         model.addAttribute("email", user.getEmail());
+        model.addAttribute("user", user);
+
 
         return "profile";
     }
@@ -95,6 +99,8 @@ public class UserController {
     ) {
         model.addAttribute("userChannel", user);
         model.addAttribute("type", type);
+        model.addAttribute("user", user);
+
 
         if ("subscriptions".equals(type)) {
             model.addAttribute("users", user.getSubscriptions());

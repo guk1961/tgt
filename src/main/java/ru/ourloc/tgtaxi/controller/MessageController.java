@@ -57,12 +57,14 @@ public class MessageController {
 
 	
     @GetMapping("/")
-    public String greeting(Model model) throws JsonProcessingException {
+    public String greeting(Model model,
+    		 @AuthenticationPrincipal User currentUser) throws JsonProcessingException {
     	List<City> citys = cityService.findAll();
     	model.addAttribute("citys", citys);
     	 ObjectMapper mapper = new ObjectMapper();
          String jsonCitys = mapper.writeValueAsString(citys);
       	 model.addAttribute("jsoncitys", jsonCitys);
+         model.addAttribute("user", currentUser);
 
          return "greeting";
     }
@@ -91,6 +93,7 @@ public class MessageController {
         model.addAttribute("page", page);
         model.addAttribute("url", "/main");
         model.addAttribute("filter", filter);
+        model.addAttribute("user", user);
 
         return "main";
     }
@@ -122,6 +125,7 @@ public class MessageController {
 
         Page<MessageDto> page = messageService.messageList(pageable, filter, user);
         model.addAttribute("page", page);
+        model.addAttribute("user", user);
 
         return "main";
     }
@@ -161,6 +165,8 @@ public class MessageController {
         model.addAttribute("message", message);
         model.addAttribute("isCurrentUser", currentUser.equals(author));
         model.addAttribute("url", "/user-messages/" + author.getId());
+        model.addAttribute("user", author);
+
 
         return "userMessages";
     }
